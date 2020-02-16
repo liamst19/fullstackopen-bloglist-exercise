@@ -12,7 +12,7 @@ import { initializeUser } from './reducers/loginReducer'
 import { getAllUsers } from './reducers/userReducer'
 // Components --------------------------------------
 import LoginForm from './components/LoginForm'
-import LogoutButton from './components/LogOutButton'
+import Menu from './components/Menu'
 import Blogs from './components/Blogs'
 import NewBlogForm from './components/NewBlogForm'
 import BlogDetails from './components/BlogDetails'
@@ -31,45 +31,30 @@ const App = ({ user, getAllUsers, getAllBlogs, initializeUser }) => {
     getAllBlogs()
   },[getAllBlogs])
 
+  // Check browser for user info
   useEffect(() => {
     initializeUser()
   },[initializeUser])
 
   return (
     <div className='container'>
-      <Router><div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="light">
-          <Navbar.Toggle ariacontrols="responsive-navbar-nav" />
-          <Navbar.Collapse id="responseive-navbar-nav">
-            <Nav.Link href="#" as="span"><Link to='/'>blogs</Link></Nav.Link>
-            {user ? <Nav.Link href="#" as="span"><Link to='/new'>create blog</Link></Nav.Link> : null}
-            <Nav.Link href="#" as="span"><Link to='/users'>users</Link></Nav.Link>
-            <Nav.Link href="#" as="span"><LogoutButton /></Nav.Link>
-          </Navbar.Collapse>
-        </Navbar>
+      <Router>
+        <Menu /> 
         <Notification />
-        <div>
+        <main>
           <Route exact path="/" render={() => <Blogs />} />
           <Route path="/blogs/:id" render={({ match }) => <BlogDetails id={match.params.id}/>} />
           <Route path="/new" render={() => <NewBlogForm />}/>
           <Route path="/login" render={() => <LoginForm />} />
           <Route path="/users" render={() => <UsersList />} />
           <Route path="/user/:id" render={({ match }) => <UserDetails id={match.params.id}/>} />
-        </div>
-      </div></Router>
+        </main>
+      </Router>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.login,
-    // users: state.users,
-    // blogs: state.blogs
-  }
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   { initializeUser, getAllBlogs, getAllUsers }
 )(App)

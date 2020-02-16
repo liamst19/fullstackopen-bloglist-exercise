@@ -6,15 +6,15 @@ import { ListGroup } from 'react-bootstrap'
 // -------------------------------------------------
 
 const BlogsList = props => {
-  return (<div className='blogs-list'>
-    <ListGroup>
-      {props.blogs.map(blog =>
-        <ListGroup.Item key={blog.id}>
-          <Link to={`/blogs/${blog.id}`} blog={blog}>{`${blog.title} by ${blog.author}`}</Link>
-        </ListGroup.Item>
-      )}
-    </ListGroup>
-  </div>)
+  return (<ListGroup>
+            {props.blogs.map(blog =>
+              <ListGroup.Item key={blog.id}>
+                <Link to={`/blogs/${blog.id}`}>
+                  {`${blog.title} by ${blog.author}`}
+                </Link>
+              </ListGroup.Item>
+            )}
+          </ListGroup>)
 }
 
 export default connect()(BlogsList)

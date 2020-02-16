@@ -10,9 +10,9 @@ const Blogs = (props) => {
   const blogListTitle = props.user ? 'My Blogs' : 'All Blogs'
   const NoBlogs = <div>There are no blogs to show</div>
 
-  return (<div className='blogs'>
-    {blogs.length > 0 ? <div><h2>{blogListTitle}</h2><BlogsList blogs={blogs} /></div> : NoBlogs}
-  </div>)
+  return ( blogs.length > 0 ? <
+    div className='blogs'><h2>{blogListTitle}</h2><BlogsList blogs={blogs} /></div> 
+    : NoBlogs )
 }
 
 const mapStateToProps = state => {

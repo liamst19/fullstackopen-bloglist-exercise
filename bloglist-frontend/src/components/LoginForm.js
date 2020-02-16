@@ -43,7 +43,8 @@ const LoginForm = props => {
     }
   }
 
-  const LoginInputForm = (<div><Form onSubmit={handleLoginBtn}>
+  const LoginInputForm = (<div><h2>Log In</h2>
+    <Form onSubmit={handleLoginBtn}>
     <Form.Group>
       <div>
         <Form.Label>username</Form.Label>
