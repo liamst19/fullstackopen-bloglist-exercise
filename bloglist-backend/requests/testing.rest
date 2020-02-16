@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/testing/reset
+
+###
+
+GET http://localhost:3003/api/testing/blogs
+
+###
+
+GET http://localhost:3003/api/testing/users

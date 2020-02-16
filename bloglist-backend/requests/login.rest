@@ -1,0 +1,29 @@
+
+# Correct User Info
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "cdickens",
+  "password": "carol"
+}
+
+###
+# Wrong User Info
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "mongoosePythonian",
+  "password": "password-onetwothree"
+}
+
+###
+# Test
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "picasso",
+  "password": "guernica"
+}

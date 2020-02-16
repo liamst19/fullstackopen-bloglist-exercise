@@ -1,0 +1,12 @@
+GET http://localhost:3003/api/blogs
+
+###
+GET http://localhost:3003/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByb3VzdCIsImlkIjoiNWU0NzVlYjFlODM4OGMxYWUyYWRlNTJiIiwiaWF0IjoxNTgxNzM1ODc3fQ.o1rUnpV_z9R7FqOjHdY8k2tGDCQ39f2v1bN3cELj6iw
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNkaWNrZW5zIiwiaWQiOiI1ZTQ3NWVkYWU4Mzg4YzFhZTJhZGU1MmMiLCJpYXQiOjE1ODE3MzYwNzN9.S1ZC0bWaecVe0We9jSV4myo1i8QJn_Oww9pxXoh7TH4
+
+
+###
+# Test Server
+GET http://localhost:3003/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBpY2Fzc28iLCJpZCI6IjVlNDYzNDAyNTI1YjY2MDY3ZDVkM2NjMSIsImlhdCI6MTU4MTY1OTIyOH0.yh8pcDxj0XC33TLjd8aCR0YMeXMXVMCtgS0vcEqTCKo

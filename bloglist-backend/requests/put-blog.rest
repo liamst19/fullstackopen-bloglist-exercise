@@ -1,0 +1,10 @@
+PUT http://localhost:3003/api/blogs/5e3ea3a40d87303f9bd81a38
+Content-Type: application/json
+
+{
+  "user": "5e3fe4c6f973dc4ca60c77d9"
+}
+
+###
+
+DELETE http://localhost:3003/api/blogs/5e3e99a00a1a083f2b5e4d54

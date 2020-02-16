@@ -1,0 +1,11 @@
+
+GET http://localhost:3003/api/blogs/5e475fec62f6d11b1a8a43e6/comments
+
+###
+
+POST http://localhost:3003/api/blogs/5e475fec62f6d11b1a8a43e6/comments
+Content-Type: application/json
+
+{
+  "comment": "and so on and so forth!"
+}

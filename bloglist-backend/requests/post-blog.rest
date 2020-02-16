@@ -1,0 +1,36 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNkaWNrZW5zIiwiaWQiOiI1ZTQ3NWVkYWU4Mzg4YzFhZTJhZGU1MmMiLCJpYXQiOjE1ODE3MzYwNzN9.S1ZC0bWaecVe0We9jSV4myo1i8QJn_Oww9pxXoh7TH4
+
+{
+    "title": "Republic",
+    "author": "Plato",
+    "url": "http://google.com/",
+    "likes": 0,
+    "user": "5e475edae8388c1ae2ade52c"
+}
+
+###
+# Send Unauthorized Request
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "2020 Presidency is for the People",
+    "author": "Bernie Sanders",
+    "url": "http://google.com/",
+    "likes": 0,
+    "user": "5e3fe4c6f973dc4ca60c77d9"
+}
+
+
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "author": "Arnold Schwarzenegger",
+    "likes": 0
+}
