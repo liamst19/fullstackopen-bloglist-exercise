@@ -16,8 +16,8 @@ import Blogs from './Blogs'
 describe('Blogs component', () => {
 
   // Generate Test Blogs Data
-  const testUser = {...userData, token: 'test-token'}
-  const testBlogs = testBlogsData(testUser) 
+  const testUser = { ...userData, token: 'test-token' }
+  const testBlogs = testBlogsData(testUser)
 
   const testStore = (user, blogs) => {
     const testReducer = (user, blogs) => combineReducers({
@@ -33,19 +33,19 @@ describe('Blogs component', () => {
 
   // Prepare Component
   const getComponent = (user = true, blogs = true) => {
-    const component = 
+    const component =
               render(<Provider store={testStore(user, blogs)}>
-                      <Router>
-                        <Blogs />
-                      </Router>
-                    </Provider>)
+                <Router>
+                  <Blogs />
+                </Router>
+              </Provider>)
     return component
   }
 
   test('renders component with user logged in', () => {
-    const component = getComponent() 
+    const component = getComponent()
     const container = component.container
-    
+
     // classname 'list-group-item' is from the bootstrap library
     const blogListEntries = container.getElementsByClassName('list-group-item')
     expect(blogListEntries.length).toBe(testBlogs.length)
@@ -55,9 +55,9 @@ describe('Blogs component', () => {
   })
 
   test('renders component with no data', () => {
-    const component = getComponent(false, false) 
+    const component = getComponent(false, false)
     const container = component.container
-    
+
     // classname 'list-group-item' is from the bootstrap library
     const blogListEntries = container.getElementsByClassName('list-group-item')
     expect(blogListEntries.length).not.toBe(testBlogs.length)

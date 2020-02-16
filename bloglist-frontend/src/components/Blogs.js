@@ -12,7 +12,7 @@ const Blogs = (props) => {
   const NoBlogs = <div>There are no blogs to show</div>
 
   return ( blogs.length > 0 ? <
-    div className='blogs'><h2>{blogListTitle}</h2><BlogsList blogs={blogs} /></div> 
+    div className='blogs'><h2>{blogListTitle}</h2><BlogsList blogs={blogs} /></div>
     : NoBlogs )
 }
 

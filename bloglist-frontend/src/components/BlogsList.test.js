@@ -13,20 +13,20 @@ import BlogsList from './BlogsList'
 describe('BlogList component', () => {
 
   // Generate Test Blogs Data
-  const testBlogs = testBlogsData(0) 
-  
+  const testBlogs = testBlogsData(0)
+
   // Prepare Component
   const getComponent = () => {
     const testReducer = (state, action) => {
       return state
     }
     const testStore = createStore(testReducer)
-    const component = 
+    const component =
               render(<Provider store={testStore}>
-                      <Router>
-                        <BlogsList blogs={testBlogs} />
-                      </Router>
-                     </Provider>)
+                <Router>
+                  <BlogsList blogs={testBlogs} />
+                </Router>
+              </Provider>)
     return component
   }
 
@@ -41,5 +41,5 @@ describe('BlogList component', () => {
     const blogListEntry = blogListEntries[0].firstChild
     expect(blogListEntry.textContent).toBe(`${testBlogs[0].title} by ${testBlogs[0].author}`)
   })
-  
+
 })

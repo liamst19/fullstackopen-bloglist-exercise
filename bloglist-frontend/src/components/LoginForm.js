@@ -45,18 +45,18 @@ const LoginForm = props => {
 
   const LoginInputForm = (<div><h2>Log In</h2>
     <Form onSubmit={handleLoginBtn}>
-    <Form.Group>
-      <div>
-        <Form.Label>username</Form.Label>
-        <Form.Control name='username' />
-      </div>
-      <div>
-        <Form.Label>password</Form.Label>
-        <Form.Control type='password' name='password' />
-      </div>
-      <Button variant='primary' type="submit">login</Button>
-    </Form.Group>
-  </Form></div>)
+      <Form.Group>
+        <div>
+          <Form.Label>username</Form.Label>
+          <Form.Control name='username' />
+        </div>
+        <div>
+          <Form.Label>password</Form.Label>
+          <Form.Control type='password' name='password' />
+        </div>
+        <Button variant='primary' type="submit">login</Button>
+      </Form.Group>
+    </Form></div>)
 
   const LoggedIn = (<p className='logged-in'>
     {`${user === null ? '' : user.username} is logged in.`}

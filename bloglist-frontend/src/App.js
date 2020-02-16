@@ -39,7 +39,7 @@ const App = ({ user, getAllUsers, getAllBlogs, initializeUser }) => {
   return (
     <div className='container'>
       <Router>
-        <Menu /> 
+        <Menu />
         <Notification />
         <main>
           <Route exact path="/" render={() => <Blogs />} />
