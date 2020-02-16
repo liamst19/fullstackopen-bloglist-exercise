@@ -6,6 +6,7 @@ import BlogsList from './BlogsList'
 // -------------------------------------------------
 
 const Blogs = (props) => {
+  console.log(props.user)
   const blogs = props.user ? props.blogs.filter(b => b.user.username === props.user.username) : props.blogs
   const blogListTitle = props.user ? 'My Blogs' : 'All Blogs'
   const NoBlogs = <div>There are no blogs to show</div>

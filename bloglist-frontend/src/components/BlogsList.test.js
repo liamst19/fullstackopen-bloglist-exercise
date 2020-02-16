@@ -2,12 +2,12 @@ import React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import { fireEvent, prettyDOM } from '@testing-library/dom'
 
 import { blogsData as testBlogsData } from '../tests/blog_test_blogs_data'
-
 import BlogsList from './BlogsList'
 
 describe('BlogList component', () => {

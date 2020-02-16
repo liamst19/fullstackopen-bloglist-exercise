@@ -1,73 +1,68 @@
-/* Blogs.tests.js
- *
- * This tests the Blogs.js component, and is part of
- * exercise 5.15:
- *
- *   Write tests for the Blog component of your
- *   application that verify that only the name
- *   and author of the blog post are shown by default.
- *   Also verify that when the blog post is clicked,
- *   the other information of the blog post becomes
- *   visible.
- *
- */
 
 import React from 'react'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
-import { fireEvent } from '@testing-library/dom'
+import { fireEvent, prettyDOM } from '@testing-library/dom'
+
+import { blogsData as testBlogsData } from '../tests/blog_test_blogs_data'
+import { newUserData as userData } from '../tests/user_test_users_data'
 import Blogs from './Blogs'
 
-test('renders content', () => {
+describe('Blogs component', () => {
 
-  const testBlogs = [{
-    id: 'mock-id-1',
-    title: 'mock one',
-    author: 'mock one author',
-    url: 'mock url one',
-    likes: 1,
-    user: {
-      name: 'mock user one',
-      id: 'mock-usr-id-1'
-    }
-  },
-  {
-    id: 'mock-id-2',
-    title: 'mock two',
-    author: 'mock two author',
-    url: 'mock url two',
-    likes: 2,
-    user: {
-      name: 'mock user two',
-      id: 'mock-usr-id-2'
-    }
-  }]
+  // Generate Test Blogs Data
+  const testUser = {...userData, token: 'test-token'}
+  const testBlogs = testBlogsData(testUser) 
 
-  const newBlogMock = jest.fn()
-  const updateBlogMock = jest.fn()
-  const deleteBlogMock = jest.fn()
-  const messageBlogMock = jest.fn()
+  const testStore = (user, blogs) => {
+    const testReducer = (user, blogs) => combineReducers({
+      blogs: (state = testBlogs, action) => {
+        return blogs? testBlogs : []
+      },
+      login: (state = testUser, action) => {
+        return  user? testUser : null
+      }
+    })
+    return createStore(testReducer(user, blogs), applyMiddleware(thunk))
+  }
 
-  const component = render(
-    <Blogs
-      blogs={testBlogs}
-      handleNewBlogSubmit={newBlogMock}
-      handleBlogUpdate={updateBlogMock}
-      handleBlogDelete={deleteBlogMock}
-      setMessage={messageBlogMock} />
-  )
+  // Prepare Component
+  const getComponent = (user = true, blogs = true) => {
+    const component = 
+              render(<Provider store={testStore(user, blogs)}>
+                      <Router>
+                        <Blogs />
+                      </Router>
+                    </Provider>)
+    return component
+  }
 
-  const divContainer = component.container
-  const blogList = divContainer.getElementsByTagName('li')
+  test('renders component with user logged in', () => {
+    const component = getComponent() 
+    const container = component.container
+    
+    // classname 'list-group-item' is from the bootstrap library
+    const blogListEntries = container.getElementsByClassName('list-group-item')
+    expect(blogListEntries.length).toBe(testBlogs.length)
 
-  expect(blogList.length).toBe(2)
-  const blog = blogList[0]
-  const title = blog.getElementsByClassName('blog-title')[0]
-  const details = blog.getElementsByClassName('blog-details')[0]
+    const blogListEntry = blogListEntries[0].firstChild
+    expect(blogListEntry.textContent).toBe(`${testBlogs[0].title} by ${testBlogs[0].author}`)
+  })
 
-  expect(details).toHaveStyle('display: none')
+  test('renders component with no data', () => {
+    const component = getComponent(false, false) 
+    const container = component.container
+    
+    // classname 'list-group-item' is from the bootstrap library
+    const blogListEntries = container.getElementsByClassName('list-group-item')
+    expect(blogListEntries.length).not.toBe(testBlogs.length)
 
-  fireEvent.click(title)
-
-  expect(details).not.toHaveStyle('display: none')
+    // There should be a message for no content
+    expect(container.textContent).toBe('There are no blogs to show')
+  })
 })

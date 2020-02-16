@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
 
-import LogoutButton from './LogOutButton'
+import LogoutButton from './LogoutButton'
 
 const Menu = props => {
   return (
