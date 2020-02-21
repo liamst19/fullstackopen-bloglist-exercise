@@ -9,32 +9,28 @@ import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import { fireEvent, prettyDOM } from '@testing-library/dom'
 
-import { blogsData as testBlogsData } from '../tests/blog_test_blogs_data'
-import { newUserData as userData } from '../tests/user_test_users_data'
+import blogReducer from '../reducers/blogReducer.js'
+jest.mock('../reducers/blogReducer.js')
+import loginReducer from '../reducers/loginReducer.js'
+jest.mock('../reducers/loginReducer.js')
+
+import testHelper from '../tests/test_helper.js'
 import Blogs from './Blogs'
 
 describe('Blogs component', () => {
 
   // Generate Test Blogs Data
-  const testUser = { ...userData, token: 'test-token' }
-  const testBlogs = testBlogsData(testUser)
+  const testReducer = combineReducers({
+    blogs: blogReducer,
+    login: loginReducer
+  })
 
-  const testStore = (user, blogs) => {
-    const testReducer = (user, blogs) => combineReducers({
-      blogs: (state = testBlogs, action) => {
-        return blogs? testBlogs : []
-      },
-      login: (state = testUser, action) => {
-        return  user? testUser : null
-      }
-    })
-    return createStore(testReducer(user, blogs), applyMiddleware(thunk))
-  }
+  const testStore = createStore(testReducer, applyMiddleware(thunk))
 
   // Prepare Component
-  const getComponent = (user = true, blogs = true) => {
+  const getComponent = () => {
     const component =
-              render(<Provider store={testStore(user, blogs)}>
+              render(<Provider store={testStore}>
                 <Router>
                   <Blogs />
                 </Router>
@@ -48,19 +44,19 @@ describe('Blogs component', () => {
 
     // classname 'list-group-item' is from the bootstrap library
     const blogListEntries = container.getElementsByClassName('list-group-item')
-    expect(blogListEntries.length).toBe(testBlogs.length)
+    expect(blogListEntries.length).toBe(testHelper.blogsData.length)
 
     const blogListEntry = blogListEntries[0].firstChild
-    expect(blogListEntry.textContent).toBe(`${testBlogs[0].title} by ${testBlogs[0].author}`)
+    expect(blogListEntry.textContent).toBe(`${testHelper.blogsData[0].title} by ${testHelper.blogsData[0].author}`)
   })
 
   test('renders component with no data', () => {
-    const component = getComponent(false, false)
+    const component = getComponent()
     const container = component.container
 
     // classname 'list-group-item' is from the bootstrap library
     const blogListEntries = container.getElementsByClassName('list-group-item')
-    expect(blogListEntries.length).not.toBe(testBlogs.length)
+    expect(blogListEntries.length).not.toBe(testHelper.blogsData.length)
 
     // There should be a message for no content
     expect(container.textContent).toBe('There are no blogs to show')

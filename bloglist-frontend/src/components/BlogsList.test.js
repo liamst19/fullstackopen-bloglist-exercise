@@ -1,5 +1,6 @@
 import React from 'react'
-import { createStore } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -7,43 +8,38 @@ import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import { fireEvent, prettyDOM } from '@testing-library/dom'
 
-import { blogsData as testBlogsData } from '../tests/blog_test_blogs_data'
+import blogReducer from '../reducers/blogReducer.js'
+jest.mock('../reducers/blogReducer.js')
+
+import testHelper from '../tests/test_helper.js'
 import BlogsList from './BlogsList'
 
 describe('BlogList component', () => {
-
-  // Generate Test Blogs Data
-  const testBlogs = testBlogsData(0)
+  const testReducer = combineReducers({
+    blogs: blogReducer
+  })
+  const testStore = createStore(testReducer, applyMiddleware(thunk))
 
   // Prepare Component
   const getComponent = () => {
-    const testReducer = (state, action) => {
-      return state
-    }
-    const testStore = createStore(testReducer)
     const component =
               render(<Provider store={testStore}>
                 <Router>
-                  <BlogsList blogs={testBlogs} />
+                  <BlogsList blogs={testHelper.blogsData} />
                 </Router>
               </Provider>)
     return component
   }
 
   test('renders component', () => {
-    const component = getComponent(testBlogs)
+    const component = getComponent()
     const blogListContainer = component.container
 
     // classname 'list-group-item' is from the bootstrap library
     const blogListEntries = blogListContainer.getElementsByClassName('list-group-item')
-    expect(blogListEntries.length).toBe(testBlogs.length)
+    expect(blogListEntries.length).toBe(testHelper.blogsData.length)
 
     const blogListEntry = blogListEntries[0].firstChild
-    expect(blogListEntry.textContent).toBe(`${testBlogs[0].title} by ${testBlogs[0].author}`)
+    expect(blogListEntry.textContent).toBe(`${testHelper.blogsData[0].title} by ${testHelper.blogsData[0].author}`)
   })
-
-<<<<<<< HEAD
 })
-=======
-})
->>>>>>> fad1ea8... cypress setup

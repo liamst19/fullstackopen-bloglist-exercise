@@ -43,7 +43,7 @@ export const addNewBlog = blog => {
 
 export const updateBlog = blog => {
   return async dispatch => {
-    const updatedBlog = blog
+    const updatedBlog = { ...testHelper.blogsData.filter(b => b.id === blog.id)[0], likes: blog.likes }
     return dispatch({
       type: actionType.UPDATE,
       content: updatedBlog
