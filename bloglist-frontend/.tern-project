@@ -1,0 +1,18 @@
+{
+  "libs": [
+    "ecmascript",
+    "react",
+    "browser",
+    "jquery"
+  ],
+  "dontLoad": [
+    "node_modules/**"
+  ],
+  "plugins": {
+    "modules": {},
+    "node": {},
+    "es_modules": {},
+    "doc_comment": null
+  },
+  "ecmaVersion": 6
+}

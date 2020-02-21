@@ -22,7 +22,11 @@ const UsersList = props => {
             {user.name}
           </Link></td>
           <td>
+<<<<<<< HEAD
+            { user.blogs.length }
+=======
             {user.blogs.length }
+>>>>>>> fad1ea8... cypress setup
           </td>
         </tr>
       ) }

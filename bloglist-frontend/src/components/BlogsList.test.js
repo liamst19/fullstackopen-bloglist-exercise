@@ -42,4 +42,8 @@ describe('BlogList component', () => {
     expect(blogListEntry.textContent).toBe(`${testBlogs[0].title} by ${testBlogs[0].author}`)
   })
 
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> fad1ea8... cypress setup

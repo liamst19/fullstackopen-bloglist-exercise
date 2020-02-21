@@ -53,16 +53,16 @@ const NewBlogForm = (props) => {
     <Form onSubmit={submitHandler}>
       <Form.Group>
         <div>
-          <Form.Label>title</Form.Label>
-          <Form.Control name='title' {...title.fields()} />
+          <Form.Label htmlFor='newBlog-title'>title</Form.Label>
+          <Form.Control id='newBlog-title' name='title' {...title.fields()} />
         </div>
         <div>
-          <Form.Label>author</Form.Label>
-          <Form.Control name='author' {...author.fields()} />
+          <Form.Label htmlFor='newBlog-author'>author</Form.Label>
+          <Form.Control id='newBlog-author' name='author' {...author.fields()} />
         </div>
         <div>
-          <Form.Label>url</Form.Label>
-          <Form.Control name='url' {...url.fields()} />
+          <Form.Label htmlFor='newBlog-url'>url</Form.Label>
+          <Form.Control id='newBlog-url' name='url' {...url.fields()} />
         </div>
         <Button variant='primary' type="submit">post blog</Button>
       </Form.Group>

@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { useField } from '../hooks/index'
 import { useResource } from '../hooks/resource'
 // Reducers ----------------------------------------
-import { addNewBlog } from '../reducers/blogReducer'
 import { notifyInfo, notifyWarning, notifyError } from '../reducers/notificationReducer'
 // -------------------------------------------------
 
@@ -58,7 +57,6 @@ const mapStateToProps = state => {
 export default withRouter(connect(
   mapStateToProps,
   {
-    addNewBlog,
     notifyInfo, notifyWarning, notifyError
   }
 )(NewBlogCommentForm))

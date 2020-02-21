@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
-  Route, Link
+  Route
 } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
 // Reducers ----------------------------------------
